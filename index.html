@@ -38,10 +38,21 @@
             border: 1px solid black;
             box-shadow: 0 0 6px rgba(0, 0, 0, 0.3), 0 0 0 2px white, 0 0 0 3px black;
             transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+            position: relative;
         }
         .quiz-links a:active {
             transform: scale(0.95);
-            box-shadow: 0 0 15px rgba(0, 123, 255, 0.8), 0 0 0 2px white, 0 0 0 3px black;
+        }
+        .quiz-links a:active::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 7.2px;
+            border: 3px solid rgba(0, 123, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.8);
         }
         .quiz-links a:first-child {
             background-image: url('https://i.imgur.com/jBQ7kXe.png');
