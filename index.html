@@ -37,27 +37,25 @@
             background-position: center;
             border: 1px solid black;
             box-shadow: 0 0 6px rgba(0, 0, 0, 0.3), 0 0 0 2px white, 0 0 0 3px black;
-            transition: transform 0.1s ease-in-out;
+            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
         }
         .quiz-links a:active {
             transform: scale(0.95);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.8), 0 0 0 2px white, 0 0 0 3px black;
+        }
+        .quiz-links a:first-child {
+            background-image: url('https://i.imgur.com/jBQ7kXe.png');
+        }
+        .quiz-links a:nth-child(2) {
+            background-image: url('https://example.com/image-quiz2.jpg');
+        }
+        .quiz-links a:nth-child(3) {
+            background-image: url('https://example.com/image-quiz3.jpg');
+        }
+        .quiz-links a:nth-child(4) {
+            background-image: url('https://example.com/image-quiz4.jpg');
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const links = document.querySelectorAll(".quiz-links a");
-            links.forEach(link => {
-                link.addEventListener("click", function(event) {
-                    event.preventDefault();
-                    const href = this.href;
-                    this.style.transform = "scale(0.95)";
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 150);
-                });
-            });
-        });
-    </script>
 </head>
 <body>
     <div class="quiz-title">
