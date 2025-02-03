@@ -37,7 +37,7 @@
             background-size: contain;
             background-position: center;
             border: 3px solid black;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5), 0 0 0 3px #777, 0 0 0 5px black;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5), 0 0 0 3px #999, 0 0 0 5px black;
             transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
             position: relative;
             overflow: hidden;
@@ -51,14 +51,15 @@
         }
         .quiz-links a:active {
             transform: scale(0.95);
-            box-shadow: 0 0 10px rgba(0, 123, 255, 1), 0 0 0 4px #555, 0 0 0 6px black, 0 0 10px rgba(0, 123, 255, 1);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 1), 0 0 0 4px #999, 0 0 0 6px black, 0 0 10px rgba(0, 123, 255, 1);
         }
         .quiz-links a:first-child {
             background-image: url('https://i.imgur.com/jBQ7kXe.png');
             background-size: cover;
         }
         .quiz-links a:nth-child(2) {
-            background-image: url('https://example.com/image-quiz2.jpg');
+            background-image: url('https://i.imgur.com/j0LSveh.jpeg');
+            background-size: cover; 
         }
         .quiz-links a:nth-child(3) {
             background-image: url('https://example.com/image-quiz3.jpg');
@@ -69,16 +70,21 @@
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            let quiz1Image = document.querySelector(".quiz-links a:first-child img");
-            let alternateImage = "https://i.imgur.com/mCAw0Q5.png"; // Remplace par l'URL de la nouvelle image
+            function setupImageFade(elementSelector, image1, image2) {
+                let quizImage = document.querySelector(elementSelector + " img");
+                setInterval(() => {
+                    quizImage.style.opacity = "0";
+                    setTimeout(() => {
+                        quizImage.src = quizImage.src === image1 ? image2 : image1;
+                        quizImage.style.opacity = "1";
+                    }, 1000);
+                }, 3000);
+            }
             
-            setInterval(() => {
-                quiz1Image.style.opacity = "0";
-                setTimeout(() => {
-                    quiz1Image.src = quiz1Image.src === "https://i.imgur.com/hFuD0S8.png" ? alternateImage : "https://i.imgur.com/hFuD0S8.png";
-                    quiz1Image.style.opacity = "1";
-                }, 1000);
-            }, 3000);
+            setupImageFade(".quiz-links a:first-child", "https://i.imgur.com/hFuD0S8.png", "https://i.imgur.com/mCAw0Q5.png");
+            setupImageFade(".quiz-links a:nth-child(2)", "https://i.imgur.com/PTirUc0.png", "https://i.imgur.com/bINQdXb.png");
+            setupImageFade(".quiz-links a:nth-child(3)", "https://i.imgur.com/qDWh7HQ.png", "https://i.imgur.com/NEW_IMAGE_3.png");
+            setupImageFade(".quiz-links a:nth-child(4)", "https://i.imgur.com/Crrh3BJ.png", "https://i.imgur.com/NEW_IMAGE_4.png");
         });
     </script>
 </head>
@@ -88,9 +94,9 @@
     </div>
     <div class="quiz-links">
         <a href="quiz1.html"><img src="https://i.imgur.com/hFuD0S8.png" alt="Quiz 1"></a>
-        <a href="quiz2.html"><img src="https://example.com/image-quiz2.jpg" alt="Quiz 2"></a>
-        <a href="quiz3.html"><img src="https://example.com/image-quiz3.jpg" alt="Quiz 3"></a>
-        <a href="quiz4.html"><img src="https://example.com/image-quiz4.jpg" alt="Quiz 4"></a>
+        <a href="quiz2.html"><img src="https://i.imgur.com/PTirUc0.png" alt="Quiz 2"></a>
+        <a href="quiz3.html"><img src="https://i.imgur.com/qDWh7HQ.png" alt="Quiz 3"></a>
+        <a href="quiz4.html"><img src="https://i.imgur.com/Crrh3BJ.png" alt="Quiz 4"></a>
     </div>
 </body>
 </html>
