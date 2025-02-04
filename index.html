@@ -100,6 +100,11 @@
             setupImageFade(".quiz-links a:nth-child(4)", "https://i.imgur.com/3B0Hzum.png", "https://i.imgur.com/heIUDrz.png");
             setupImageFade(".quiz-links a:nth-child(5)", "https://i.imgur.com/i6UZp18.png", "https://i.imgur.com/1uNWDge.png");
             setupImageFade(".quiz-links a:nth-child(6)", "https://i.imgur.com/ebmmVkU.png", "https://i.imgur.com/kH8sbig.png");
+            
+            document.querySelector(".quiz-links a:nth-child(6)").addEventListener("click", function() {
+                let audio = new Audio("audio/pika.mp3");
+                audio.play();
+            });
         });
     </script>
 </head>
