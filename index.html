@@ -80,6 +80,20 @@
             background-size: cover; 
 			background-position: 50% 20%;
         }
+      document.addEventListener("DOMContentLoaded", function() {
+    let quiz6Link = document.querySelector(".quiz-links a:nth-child(6)");
+
+    quiz6Link.addEventListener("click", function(event) {
+        event.preventDefault(); // Empêche la navigation immédiate
+        let audio = new Audio("audio/pika.mp3");
+        audio.play();
+
+        // Attends 1,5 seconde avant d'aller sur la page
+        setTimeout(() => {
+            window.location.href = quiz6Link.href;
+        }, 1500);
+    });
+});
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
