@@ -80,22 +80,22 @@
             background-size: cover; 
 			background-position: 50% 20%;
         }
-      document.addEventListener("DOMContentLoaded", function() {
-    let quiz6Link = document.querySelector(".quiz-links a:nth-child(6)");
-
-    quiz6Link.addEventListener("click", function(event) {
-        event.preventDefault(); // Empêche la navigation immédiate
-        let audio = new Audio("audio/click-sound.mp3");
-        audio.play();
-
-        // Attends 1,5 seconde avant d'aller sur la page
-        setTimeout(() => {
-            window.location.href = quiz6Link.href;
-        }, 1500);
-    });
-});
     </style>
     <script>
+document.addEventListener("DOMContentLoaded", function() {
+        let quiz6Link = document.querySelector(".quiz-links a:nth-child(6)");
+
+        quiz6Link.addEventListener("click", function(event) {
+            event.preventDefault(); // Empêche la navigation immédiate
+            let audio = new Audio("audio/click-sound.mp3");
+            audio.play();
+
+            // Attends 1,5 seconde avant d'aller sur la page
+            setTimeout(() => {
+                window.location.href = quiz6Link.href;
+            }, 1500);
+        });
+    });
         document.addEventListener("DOMContentLoaded", function() {
             function setupImageFade(elementSelector, image1, image2) {
                 let quizImage = document.querySelector(elementSelector + " img");
@@ -127,7 +127,7 @@
         <a href="quiz3.html"><img src="https://i.imgur.com/a8ZY2hT.png" alt="Quiz 3"></a>
         <a href="quiz4.html"><img src="https://i.imgur.com/3B0Hzum.png" alt="Quiz 4"></a>
         <a href="quiz5.html"><img src="https://i.imgur.com/i6UZp18.png" alt="Quiz 5"></a>
-        <a href="https://remi-mason.github.io/quiz-6/"><img src="https://i.imgur.com/ebmmVkU.png" alt="Quiz 6"></a>
+        <a href="quiz6.html"><img src="https://i.imgur.com/ebmmVkU.png" alt="Quiz 6"></a>
     </div>
 </body>
 </html>
