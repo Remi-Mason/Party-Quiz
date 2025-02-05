@@ -1,133 +1,146 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz S.S.I.A.P 1</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-            background-color: #f4f4f4;
-        }
-        .quiz-title {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .quiz-links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .quiz-links a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px;
-            padding: 36px 14px;
-            text-decoration: none;
-            border-radius: 7.2px;
-            width: 90%;
-            max-width: 320px;
-            text-align: center;
-            background-size: contain;
-            background-position: center;
-            border: 3px solid black;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5), 0 0 0 3px #999, 0 0 0 5px black;
-            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
-            position: relative;
-            overflow: hidden;
-        }
-        .quiz-links a img {
-            max-width: 80%;
-            max-height: 80%;
-            object-fit: contain;
-            position: absolute;
-            transition: opacity 1s ease-in-out;
-        }
-        .quiz-links a:active {
-            transform: scale(0.95);
-            box-shadow: 0 0 10px rgba(0, 123, 255, 1), 0 0 0 4px #999, 0 0 0 6px black, 0 0 10px rgba(0, 123, 255, 1);
-        }
-        .quiz-links a:first-child {
-            background-image: url('https://i.imgur.com/jBQ7kXe.png');
-            background-position: 50% 30%;
-            background-size: cover;
-        }
-        .quiz-links a:nth-child(2) {
-            background-image: url('https://i.imgur.com/j0LSveh.jpeg');
-            background-size: cover; 
-        }
-        .quiz-links a:nth-child(3) {
-            background-image: url('https://i.imgur.com/DMMfEWl.jpeg');
-            background-size: cover; 
-        }
-        .quiz-links a:nth-child(4) {
-            background-image: url('https://i.imgur.com/GMgR2Rv.jpeg');
-            background-size: cover; 
-        }
-        .quiz-links a:nth-child(5) {
-            background-image: url('https://i.imgur.com/1hwOKMq.jpeg');
-            background-size: cover; 
-			background-position: 50% 30%;
-        }
-        .quiz-links a:nth-child(6) {
-            background-image: url('https://i.imgur.com/HyWTtHE.jpeg');
-            background-size: cover; 
-			background-position: 50% 20%;
-        }
-    </style>
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-        let quiz6Link = document.querySelector(".quiz-links a:nth-child(6)");
-
-        quiz6Link.addEventListener("click", function(event) {
-            event.preventDefault(); // Empêche la navigation immédiate
-            let audio = new Audio("audio/click-sound.mp3");
-            audio.play();
-
-            // Attends 1,5 seconde avant d'aller sur la page
-            setTimeout(() => {
-                window.location.href = quiz6Link.href;
-            }, 1200);
-        });
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz S.S.I.A.P 1</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+    .quiz-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .quiz-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    /* Les liens sont désactivés par défaut */
+    .quiz-links a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      padding: 36px 14px;
+      text-decoration: none;
+      border-radius: 7.2px;
+      width: 90%;
+      max-width: 320px;
+      text-align: center;
+      background-size: contain;
+      background-position: center;
+      border: 3px solid black;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.5), 0 0 0 3px #999, 0 0 0 5px black;
+      transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+      position: relative;
+      overflow: hidden;
+      pointer-events: none; /* Désactivé tant que la page ne charge pas */
+      opacity: 0.5;       /* Visuellement atténué */
+    }
+    .quiz-links a img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+      position: absolute;
+      transition: opacity 1s ease-in-out;
+    }
+    .quiz-links a:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 10px rgba(0, 123, 255, 1), 0 0 0 4px #999, 0 0 0 6px black, 0 0 10px rgba(0, 123, 255, 1);
+    }
+    .quiz-links a:first-child {
+      background-image: url('https://i.imgur.com/jBQ7kXe.png');
+      background-position: 50% 30%;
+      background-size: cover;
+    }
+    .quiz-links a:nth-child(2) {
+      background-image: url('https://i.imgur.com/j0LSveh.jpeg');
+      background-size: cover;
+    }
+    .quiz-links a:nth-child(3) {
+      background-image: url('https://i.imgur.com/DMMfEWl.jpeg');
+      background-size: cover;
+    }
+    .quiz-links a:nth-child(4) {
+      background-image: url('https://i.imgur.com/GMgR2Rv.jpeg');
+      background-size: cover;
+    }
+    .quiz-links a:nth-child(5) {
+      background-image: url('https://i.imgur.com/1hwOKMq.jpeg');
+      background-size: cover;
+      background-position: 50% 30%;
+    }
+    .quiz-links a:nth-child(6) {
+      background-image: url('https://i.imgur.com/HyWTtHE.jpeg');
+      background-size: cover;
+      background-position: 50% 20%;
+    }
+  </style>
+  <script>
+    // Dès que le DOM est prêt, on configure les comportements (pour l'image et le lien quiz 6)
+    document.addEventListener("DOMContentLoaded", function() {
+      let quiz6Link = document.querySelector(".quiz-links a:nth-child(6)");
+      quiz6Link.addEventListener("click", function(event) {
+        event.preventDefault(); // Empêche la navigation immédiate
+        let audio = new Audio("audio/click-sound.mp3");
+        audio.play();
+        // Attends 1,2 seconde avant d'aller sur la page
+        setTimeout(() => {
+          window.location.href = quiz6Link.href;
+        }, 1200);
+      });
     });
-        document.addEventListener("DOMContentLoaded", function() {
-            function setupImageFade(elementSelector, image1, image2) {
-                let quizImage = document.querySelector(elementSelector + " img");
-                setInterval(() => {
-                    quizImage.style.opacity = "0";
-                    setTimeout(() => {
-                        quizImage.src = quizImage.src === image1 ? image2 : image1;
-                        quizImage.style.opacity = "1";
-                    }, 1000);
-                }, 3000);
-            }
-            
-            setupImageFade(".quiz-links a:first-child", "https://i.imgur.com/INnVfzR.png", "https://i.imgur.com/mCAw0Q5.png");
-            setupImageFade(".quiz-links a:nth-child(2)", "https://i.imgur.com/b8FLd3K.png", "https://i.imgur.com/bINQdXb.png");
-            setupImageFade(".quiz-links a:nth-child(3)", "https://i.imgur.com/a8ZY2hT.png", "https://i.imgur.com/Fh99SnP.png");
-            setupImageFade(".quiz-links a:nth-child(4)", "https://i.imgur.com/3B0Hzum.png", "https://i.imgur.com/heIUDrz.png");
-            setupImageFade(".quiz-links a:nth-child(5)", "https://i.imgur.com/i6UZp18.png", "https://i.imgur.com/1uNWDge.png");
-            setupImageFade(".quiz-links a:nth-child(6)", "https://i.imgur.com/ebmmVkU.png", "https://i.imgur.com/kH8sbig.png");
-        });
-    </script>
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      function setupImageFade(elementSelector, image1, image2) {
+        let quizImage = document.querySelector(elementSelector + " img");
+        setInterval(() => {
+          quizImage.style.opacity = "0";
+          setTimeout(() => {
+            quizImage.src = quizImage.src === image1 ? image2 : image1;
+            quizImage.style.opacity = "1";
+          }, 1000);
+        }, 3000);
+      }
+      
+      setupImageFade(".quiz-links a:first-child", "https://i.imgur.com/INnVfzR.png", "https://i.imgur.com/mCAw0Q5.png");
+      setupImageFade(".quiz-links a:nth-child(2)", "https://i.imgur.com/b8FLd3K.png", "https://i.imgur.com/bINQdXb.png");
+      setupImageFade(".quiz-links a:nth-child(3)", "https://i.imgur.com/a8ZY2hT.png", "https://i.imgur.com/Fh99SnP.png");
+      setupImageFade(".quiz-links a:nth-child(4)", "https://i.imgur.com/3B0Hzum.png", "https://i.imgur.com/heIUDrz.png");
+      setupImageFade(".quiz-links a:nth-child(5)", "https://i.imgur.com/i6UZp18.png", "https://i.imgur.com/1uNWDge.png");
+      setupImageFade(".quiz-links a:nth-child(6)", "https://i.imgur.com/ebmmVkU.png", "https://i.imgur.com/kH8sbig.png");
+    });
+    
+    // Désactiver les liens jusqu'au chargement complet de la page
+    window.addEventListener("load", function() {
+      const links = document.querySelectorAll(".quiz-links a");
+      links.forEach(link => {
+        // Réactivation des liens
+        link.style.pointerEvents = "auto";
+        link.style.opacity = "1";
+      });
+    });
+  </script>
 </head>
 <body>
-    <div class="quiz-title">
-        <a href="https://i.imgur.com/2WqgCAv.png"><img src="https://i.imgur.com/2WqgCAv.png" alt="Quiz S.S.I.A.P 1"></a>
-    </div>
-    <div class="quiz-links">
-        <a href="quiz1.html"><img src="https://i.imgur.com/INnVfzR.png" alt="Quiz 1"></a>
-        <a href="quiz2.html"><img src="https://i.imgur.com/b8FLd3K.png" alt="Quiz 2"></a>
-        <a href="quiz3.html"><img src="https://i.imgur.com/a8ZY2hT.png" alt="Quiz 3"></a>
-        <a href="quiz4.html"><img src="https://i.imgur.com/3B0Hzum.png" alt="Quiz 4"></a>
-        <a href="quiz5.html"><img src="https://i.imgur.com/i6UZp18.png" alt="Quiz 5"></a>
-        <a href="https://remi-mason.github.io/quiz-6/"><img src="https://i.imgur.com/ebmmVkU.png" alt="Quiz 6"></a>
-    </div>
+  <div class="quiz-title">
+    <a href="https://i.imgur.com/2WqgCAv.png"><img src="https://i.imgur.com/2WqgCAv.png" alt="Quiz S.S.I.A.P 1"></a>
+  </div>
+  <div class="quiz-links">
+    <a href="quiz1.html"><img src="https://i.imgur.com/INnVfzR.png" alt="Quiz 1"></a>
+    <a href="quiz2.html"><img src="https://i.imgur.com/b8FLd3K.png" alt="Quiz 2"></a>
+    <a href="quiz3.html"><img src="https://i.imgur.com/a8ZY2hT.png" alt="Quiz 3"></a>
+    <a href="quiz4.html"><img src="https://i.imgur.com/3B0Hzum.png" alt="Quiz 4"></a>
+    <a href="quiz5.html"><img src="https://i.imgur.com/i6UZp18.png" alt="Quiz 5"></a>
+    <a href="https://remi-mason.github.io/quiz-6/"><img src="https://i.imgur.com/ebmmVkU.png" alt="Quiz 6"></a>
+  </div>
 </body>
 </html>
