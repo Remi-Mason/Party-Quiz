@@ -85,6 +85,14 @@
     }
   </style>
   <script>
+    // Si la page est affichée depuis le cache (back‑forward cache),
+    // on force son rechargement pour réinitialiser les écouteurs.
+    window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    });
+    
     // Dès que le DOM est prêt, on configure les comportements pour les liens
     document.addEventListener("DOMContentLoaded", function() {
       // Configuration du fade des images
