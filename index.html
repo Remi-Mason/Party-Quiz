@@ -92,10 +92,23 @@
         window.location.reload();
       }
     });
-    
-    // Dès que le DOM est prêt, on configure les comportements pour les liens
+
     document.addEventListener("DOMContentLoaded", function() {
-      // Configuration du fade des images
+      // Préchargement des fichiers audio dans un dictionnaire.
+      const audioFiles = {};
+      const links = document.querySelectorAll(".quiz-links a");
+      links.forEach(link => {
+        // Récupère le chemin défini dans data-sound ou utilise une valeur par défaut.
+        const soundSrc = link.getAttribute("data-sound") || "audio/click-sound.mp3";
+        // Si le son n'a pas encore été préchargé, on le crée.
+        if (!audioFiles[soundSrc]) {
+          const audio = new Audio(soundSrc);
+          audio.preload = "auto";
+          audioFiles[soundSrc] = audio;
+        }
+      });
+
+      // Fonction pour configurer l'effet de fondu d'image sur chaque bouton.
       function setupImageFade(elementSelector, image1, image2) {
         let quizImage = document.querySelector(elementSelector + " img");
         setInterval(() => {
@@ -106,7 +119,8 @@
           }, 1000);
         }, 3000);
       }
-      
+
+      // Configuration du fondu des images pour chaque lien
       setupImageFade(".quiz-links a:first-child", "https://i.imgur.com/INnVfzR.png", "https://i.imgur.com/mCAw0Q5.png");
       setupImageFade(".quiz-links a:nth-child(2)", "https://i.imgur.com/b8FLd3K.png", "https://i.imgur.com/bINQdXb.png");
       setupImageFade(".quiz-links a:nth-child(3)", "https://i.imgur.com/a8ZY2hT.png", "https://i.imgur.com/Fh99SnP.png");
@@ -114,24 +128,34 @@
       setupImageFade(".quiz-links a:nth-child(5)", "https://i.imgur.com/i6UZp18.png", "https://i.imgur.com/1uNWDge.png");
       setupImageFade(".quiz-links a:nth-child(6)", "https://i.imgur.com/ebmmVkU.png", "https://i.imgur.com/kH8sbig.png");
 
-      // Ajout d'un écouteur pour tous les liens de quiz afin d'attendre que le son soit joué avant navigation.
-      const links = document.querySelectorAll(".quiz-links a");
+      // Ajout d'un écouteur pour chaque lien qui utilise l'audio préchargé.
       links.forEach(link => {
         link.addEventListener("click", function(event) {
           event.preventDefault(); // Empêche la navigation immédiate
-          let audio = new Audio("audio/click-sound.mp3");
-          // Désactive temporairement le lien pour éviter plusieurs clics
-          link.style.pointerEvents = "none";
-          audio.play().catch(err => console.error("Erreur de lecture audio", err));
-          // Lorsque le son est terminé, on active la navigation.
-          audio.addEventListener("ended", function() {
+
+          const soundSrc = link.getAttribute("data-sound") || "audio/click-sound.mp3";
+          const audio = audioFiles[soundSrc];
+          if (audio) {
+            // Réinitialise la lecture pour être sûr que le son joue depuis le début.
+            audio.currentTime = 0;
+            // Désactivation temporaire pour éviter plusieurs clics.
+            link.style.pointerEvents = "none";
+            audio.play().catch(err => console.error("Erreur de lecture audio", err));
+            // Une fois la lecture terminée, on procède à la navigation.
+            audio.addEventListener("ended", function handler() {
+              window.location.href = link.href;
+              // On retire l'écouteur pour éviter des appels multiples.
+              audio.removeEventListener("ended", handler);
+            });
+          } else {
+            // En cas de problème, on navigue directement.
             window.location.href = link.href;
-          });
+          }
         });
       });
     });
-    
-    // Réactivation des liens dès que la page est complètement chargée
+
+    // Réactivation des liens dès que la page est complètement chargée.
     window.addEventListener("load", function() {
       const links = document.querySelectorAll(".quiz-links a");
       links.forEach(link => {
@@ -143,15 +167,29 @@
 </head>
 <body>
   <div class="quiz-title">
-    <a href="https://i.imgur.com/2WqgCAv.png"><img src="https://i.imgur.com/2WqgCAv.png" alt="Quiz S.S.I.A.P 1"></a>
+    <a href="https://i.imgur.com/2WqgCAv.png">
+      <img src="https://i.imgur.com/2WqgCAv.png" alt="Quiz S.S.I.A.P 1">
+    </a>
   </div>
   <div class="quiz-links">
-    <a href="https://remi-mason.github.io/quiz-1/"><img src="https://i.imgur.com/INnVfzR.png" alt="Quiz 1"></a>
-    <a href="quiz2.html"><img src="https://i.imgur.com/b8FLd3K.png" alt="Quiz 2"></a>
-    <a href="quiz3.html"><img src="https://i.imgur.com/a8ZY2hT.png" alt="Quiz 3"></a>
-    <a href="quiz4.html"><img src="https://i.imgur.com/3B0Hzum.png" alt="Quiz 4"></a>
-    <a href="quiz5.html" alt="Quiz 5"></a>
-    <a href="https://remi-mason.github.io/quiz-6/"><img src="https://i.imgur.com/ebmmVkU.png" alt="Quiz 6"></a>
+    <a href="https://remi-mason.github.io/quiz-1/" data-sound="audio/haduken.mp3">
+      <img src="https://i.imgur.com/INnVfzR.png" alt="Quiz 1">
+    </a>
+    <a href="quiz2.html" data-sound="audio/click-sound2.mp3">
+      <img src="https://i.imgur.com/b8FLd3K.png" alt="Quiz 2">
+    </a>
+    <a href="quiz3.html" data-sound="audio/click-sound3.mp3">
+      <img src="https://i.imgur.com/a8ZY2hT.png" alt="Quiz 3">
+    </a>
+    <a href="quiz4.html" data-sound="audio/click-sound4.mp3">
+      <img src="https://i.imgur.com/3B0Hzum.png" alt="Quiz 4">
+    </a>
+    <a href="quiz5.html" data-sound="audio/click-sound5.mp3">
+      <img src="https://i.imgur.com/i6UZp18.png" alt="Quiz 5">
+    </a>
+    <a href="https://remi-mason.github.io/quiz-6/" data-sound="audio/pika.mp3">
+      <img src="https://i.imgur.com/ebmmVkU.png" alt="Quiz 6">
+    </a>
   </div>
 </body>
 </html>
